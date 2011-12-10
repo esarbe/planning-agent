@@ -1,0 +1,14 @@
+{
+  "sword": {
+    "requirements": { 
+      "wood": 1,
+      "metal": 2
+    }
+  },
+  "axe": {
+    "requirements": {
+      "metal": 3
+    }
+  }
+
+}
