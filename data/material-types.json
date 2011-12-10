@@ -1,0 +1,12 @@
+{
+  "ash": {
+    "classes": ["wood"],
+  },
+  "iron": {
+    "classes": ["metal", "brittle"]
+  },
+  "silver": {
+    "classes": ["metal", "soft"],
+    
+  }
+}
