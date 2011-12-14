@@ -1,6 +1,4 @@
-package state
-
-import "math"
+package planning 
 
 type State interface {
   ListActions() []Action
@@ -9,12 +7,9 @@ type State interface {
 
 type Node interface {
   State() State
-  Parent() State
+  Parent() Node 
+  Action() Action
   PathCost() float32
-}
-
-type Solver interface {
-  Solve(problem Problem) *[]Action
 }
 
 // implementations
@@ -28,6 +23,33 @@ type NamedAction struct {
   name string
   execute func(State) State
   validate func(State) bool
+}
+
+type NamedNode struct {
+  parent Node
+  action Action
+  pathCost float32
+  state State
+}
+
+func (n NamedNode) Parent() Node {
+  return n.parent
+}
+
+func (n NamedNode) State() State {
+  return n.state
+}
+
+func (n NamedNode) Action() Action {
+  return n.action
+}
+
+func (n NamedNode) PathCost() float32 {
+  return n.pathCost
+}
+
+func (n *NamedNode) SetPathCost(pathCost float32) {
+  n.pathCost = pathCost
 }
 
 func (a NamedAction) Cost() float32 {
