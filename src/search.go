@@ -1,49 +1,33 @@
-package "search"
-import "state"
-import "problem"
+package planning
 
+import vector "container/vector"
 
-type BreadthFirst struct {
-  frontier map[State] bool
-  known [State] bool
+func (error *NoSolutionError) String() string {
+  return error.message
 }
 
-func Min(actions []Action) (best Action) {
-  var min float32 = math.MaxFloat32
-  for _, action := range actions {
-    if action.Cost() < min {
-      best = action
-    }
-  }
-  return
+func (problem *Problem) BreadthFirstSearch() (solution Node, error Error) {
+
+  node := &Node{problem, nil, nil, float32(0)}
+
+  if problem.IsGoal(node.State()) {
+    return node
   }
 
-func Min(states []WeightedState ) (best WeightedState) {
-  var min float = math.MaxFloat32
-  for _, state := range states {
-    if (state.Weight() < min {
-      best = state
+  frontier := []State{0,0}
+  explored := []State{0,0}
+
+  frontier = append(frontier, node)
+
+  for {
+    if len(frontier) == 0 {
+      return nil, &NoSolutionError{"Frontier empty"} 
+    }
+
+    node, frontier = frontier[0], frontier[1, len(frontier)]
+    for action := problem.Actions(node.state) {
+       child = 
     }
   }
-  return
-}
-
-func (b BreadthFirst) Solve (start WeightedState, end WeightedState) []Action {
-  for _, action in range start.ListActions() {
-    next := action.Do(start)
-
-    currentWeight := start.Weight() + action.Cost() 
-
-    if next.Weight() > currentWeight {
-      next.SetWeight(currentWeight)
-    }
-
-    if !b.frontier[next] && !b.known[next] {
-      b.frontier[next] = true 
-    }
-  }
-
-  b.frontier[start] = false, false
-  next := Min(b.frontier 
 }
 
