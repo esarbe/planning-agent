@@ -1,4 +1,4 @@
-package state
+package planning 
 
 import "testing"
 import "fmt"
@@ -16,7 +16,7 @@ func TestStateMachine(t *testing.T) {
 
   startState := &NamedState{"StartState", []Action {endAction}}
   startState.ListActions()
-  
+
   fmt.Println("test")
   t.Error("failed");
 }
