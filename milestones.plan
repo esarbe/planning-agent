@@ -1,0 +1,21 @@
+goblin keeper
+-------------
+build a goblin dungeon, digg for minerals, rob travellers and merchants, farm for food, forge new weapons 
+
+
+milestone 0 "the void and the darkness"
+ - simple problem solver (depth first)
+ - randomized 2d world with materials
+
+milestone 1 (gui) "there shall be light"
+ - display world in cui
+
+milestone 2 "all of god's creations"
+ - random growth of plants (no proper seeding yet)
+ - first animal creatures, implement movement, starving, death
+ - implement pathfinding
+
+milestone 3 "the righteous man"
+ - chopping down trees (no storage yet)
+ - workbench and flute, harp object
+ - create, plan and execute order: create flute, create harp
