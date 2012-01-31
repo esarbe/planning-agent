@@ -2,8 +2,9 @@ include $(GOROOT)/src/Make.inc
 
 TARG=planning
 GOFILES=\
-    state.go\
-    queue.go\
+    hanoi.go\
     problem.go\
+    search.go\
+    queue/*.go\
 
 include $(GOROOT)/src/Make.pkg
