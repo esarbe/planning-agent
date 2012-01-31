@@ -1,33 +1,54 @@
 package planning
 
-import vector "container/vector"
+import "os"
 
 func (error *NoSolutionError) String() string {
   return error.message
 }
 
-func (problem *Problem) BreadthFirstSearch() (solution Node, error Error) {
+func equals(lhs Comparable, rhs Comparable) bool {
+  ls := lhs.(*Node).state
+  rs := rhs.(*Node).state
+  return ls.Equals(rs)
+}
 
-  node := &Node{problem, nil, nil, float32(0)}
+func BreadthFirstSearch(problem Problem) (solution Node, error os.Error) {
+  return Search(problem, NewPriorityQueue())
+}
 
-  if problem.IsGoal(node.State()) {
-    return node
-  }
+func Search(problem Problem, frontier Queue) (solution Node, error os.Error) {
 
-  frontier := []State{0,0}
-  explored := []State{0,0}
+  node := NewNode(nil, nil, problem.Initial())
+  explored := NewHashQueue()
 
-  frontier = append(frontier, node)
+  frontier.Push(node)
+
+  //fmt.Println("frontier length: ", frontier.Len())
 
   for {
-    if len(frontier) == 0 {
-      return nil, &NoSolutionError{"Frontier empty"} 
+    if frontier.Len() == 0 {
+      error = os.NewError("No solution found")
+      return
     }
 
-    node, frontier = frontier[0], frontier[1, len(frontier)]
-    for action := problem.Actions(node.state) {
-       child = 
+    node = frontier.Pop().(*Node)
+
+    if problem.IsGoal(node.state) {
+      //fmt.Println("found solution: ", node.state)
+      solution = *node
+      return
     }
+    //fmt.Println("iterating over states..")
+    for action, nextState := range(problem.Successors(node.state)) {
+      //fmt.Println("state:", nextState)
+      nextNode := NewNode(node, action, nextState)
+      if !frontier.Contains(nextNode) && !explored.Contains(nextNode) {
+        frontier.Push(nextNode)
+      }
+    }
+    explored.Push(node)
   }
+
+  panic("how did you get out of that infinite loop?!")
 }
 
