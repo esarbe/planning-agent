@@ -1,6 +1,7 @@
-package planning
+package ai 
 
 import "fmt"
+import "collection"
 
 type TowerOfHanoi struct {
   pegs int
@@ -15,7 +16,7 @@ type HanoiAction struct {
 
 type HanoiState []int
 
-func (h HanoiState) Equals (other Hashable) bool {
+func (h HanoiState) Equals (other collection.Hashable) bool {
   o := other.(HanoiState)
   if h.Hash() == o.Hash() {
     return true
@@ -53,14 +54,27 @@ func topblock(s []int, peg int) (top int) {
   return
 }
 
-func NewHanoiState(length int) HanoiState {
-  s := make([]int, length)
+func NewHanoiState(blocks int) HanoiState {
+  s := make([]int, blocks)
   return s
 }
 
 func (t TowerOfHanoi) Goal() (goal State){
   goal = t.goal
   return
+}
+
+func (t TowerOfHanoi) H(state State) float32 {
+  s := state.(HanoiState)
+  h := float32(0)
+
+  for i := range(s) {
+    if s[i] != t.goal[i] {
+      h = h + 1.0 // 1 penalty for each block on the wrong peg
+    }
+  }
+
+  return h
 }
 
 func (t TowerOfHanoi) IsGoal (goal State) bool {
@@ -112,8 +126,4 @@ func (t TowerOfHanoi) Successors (state State) (successors map[string]State)  {
 
   return
 }
-
-
-
-
 

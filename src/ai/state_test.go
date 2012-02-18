@@ -1,4 +1,4 @@
-package planning 
+package ai
 
 import "testing"
 

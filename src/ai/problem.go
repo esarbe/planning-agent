@@ -1,4 +1,6 @@
-package planning
+package ai
+
+import . "collection"
 
 type NoSolutionError struct {
   message string
@@ -17,16 +19,28 @@ type Node struct {
   parent *Node
 }
 
-type Error struct {
-  message string
-}
-
 func NewNode(parent *Node, action Action, state State) (n *Node) {
   n = new(Node)
   n.state = state
   n.action = action
   n.parent = parent
   return
+}
+
+func (n Node) Cost() float32 {
+  return n.cost
+}
+
+func (n Node) State() State {
+  return n.state
+}
+
+func (n Node) Action() Action {
+  return n.action
+}
+
+func (n Node) Parent() *Node {
+  return n.parent
 }
 
 func (n Node) Equals (other Hashable) bool {
@@ -44,14 +58,7 @@ func (n Node) Hash() string {
 func (n Node) Compare (other Comparable) int {
   o := other.(*Node)
 
-  if n.cost < o.cost {
-    return -1
-  } else if n.cost == o.cost {
-    return 0
-  } else if n.cost > o.cost {
-    return 1
-  }
-  panic("there is something seriously wrong..")
+  return int(n.cost - o.cost)
 }
 
 type Problem interface {
@@ -60,6 +67,11 @@ type Problem interface {
   IsGoal(state State) bool
   StepCost(cost float32, origin State, action Action, destination State) (stepCost float32)
   Successors(state State) (successors map[string]State)
+}
+
+type HeuristicProblem interface {
+  Problem
+  H(state State) float32
 }
 
 type Solver interface {
