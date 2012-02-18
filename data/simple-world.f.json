@@ -1,0 +1,42 @@
+def = {
+  predicates : {
+    "in_hand" : ['x'],
+    "on_table" : ['x']
+  },
+
+  actions : {
+    pick_up : {
+      parameters : ['obj'],
+      precondition : {
+        and : {
+          on_table : ['obj'],
+          not : { in_hand : ['obj'] }
+        }
+      },
+      effect : {
+        and : {
+          in_hand : ['obj'],
+          not : { on_table : ['obj'] }
+        }
+      }
+    },
+    
+    put_down : {
+      parameters : ['obj'],
+      precondition : {
+        and : {
+          in_hand : ['obj'],
+          not : { on_table : ['obj'] }
+        }
+      },
+      effect : {
+        and : {
+          on_table : ['obj'],
+          not : { in_hand : ['obj']}
+        }
+      }
+    }
+  }
+}
+
+
