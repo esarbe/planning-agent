@@ -1,0 +1,33 @@
+objects = {
+  "template" : {},
+  "color" : {},
+
+  "block" : {
+    "is" : "template",
+    "material" : {
+      "wood" : 1.0
+    } 
+  }
+
+  "red" : {
+    "is" : "color"
+  }
+
+  "handle" : {
+    "components" : { "block" : 0.1, "color" : "0.1" }
+    "finishing" : "color",
+    "requiredAbility" : ""
+  }
+
+
+}
+
+
+tasks = {
+  "create object" : {
+    "precondition" : {
+      
+    }
+  }
+
+}
