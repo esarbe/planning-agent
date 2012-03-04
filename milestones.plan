@@ -12,10 +12,15 @@ milestone 1 (gui) "there shall be light"
 
 milestone 2 "all of god's creations"
  - random growth of plants (no proper seeding yet)
- - first animal creatures, implement movement, starving, death
+ - first animal creatures, implement movement
  - implement pathfinding
 
 milestone 3 "the righteous man"
  - chopping down trees (no storage yet)
  - workbench and flute, harp object
  - create, plan and execute order: create flute, create harp
+
+milestone 4 "evil was brought upon the world"
+ - damage types, starving, death
+ - 
+
