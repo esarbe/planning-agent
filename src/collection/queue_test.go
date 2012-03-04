@@ -42,6 +42,7 @@ func TestPriorityQueue(t *testing.T) {
 
 	if q.Len() != 100 {
 		fmt.Println("queue does not have expected length")
+                t.FailNow()
 	}
 
 	fmt.Println("testing queue pop...")
@@ -51,6 +52,7 @@ func TestPriorityQueue(t *testing.T) {
 
 	if q.Len() != 50 {
 		fmt.Println("queue does not have expected length of 50, is ", q.Len(), " instead")
+                t.FailNow()
 	}
 
 	fmt.Println("done.")
