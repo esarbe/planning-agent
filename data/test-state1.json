@@ -1,0 +1,23 @@
+{
+  "predicates" : {
+    "BooleanPredicate" : ["is", "has"]
+  },
+
+  "chains" : {
+    "isWood" : { "is" : { "wood" : "x"}},
+    "isMetal" : { "is" : { "metal" : "x"}}
+  },
+
+  "init" : {
+    "objects" : {
+      "bar" : { "is" : { "steel" : true}, "at": { "table" : true }},
+      "block" : { "is" : { "wood" : true }, "at" : { "wood_stock" : true }},
+      "table" : { "at" : { "room_A" : true }}
+    }
+  },
+
+  "goal" : {
+    "bar" : { "at" : { "table" : true  }}
+  }      
+}
+

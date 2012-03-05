@@ -1,0 +1,19 @@
+{
+  "objects" :
+  {
+    "bar" : 
+    {
+      relations :
+      {
+        "is" :
+        {
+         "steel" : 1.0
+        },
+        "on" :
+        {
+          "table" : 1.0
+        }
+      }
+    }   
+  } 
+}
