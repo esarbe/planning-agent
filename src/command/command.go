@@ -1,6 +1,7 @@
 package command
 
 import "fmt"
+import "strings"
 
 type Command interface {
   Index() []string
@@ -33,6 +34,11 @@ func (mc *MetaCommand) Index () ([]string) {
 
 func (mc *MetaCommand) Do (arguments []string) (string, bool) {
   c := arguments[0]
+
+  if strings.TrimSpace(c) == "" {
+    return "", true
+  }
+
   command, ok := mc.commands[c]
 
   if !ok {
