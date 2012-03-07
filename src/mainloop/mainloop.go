@@ -5,6 +5,7 @@ import "os"
 
 type Runner interface {
   Prepare ()
+  Setup ()
   Run () bool
   Finalize()
 }
@@ -12,6 +13,7 @@ type Runner interface {
 func Loop (r Runner) {
   run := true
   for run {
+    r.Setup()
     run = r.Run()
   }
 }
@@ -19,15 +21,17 @@ func Loop (r Runner) {
 type Mainloop struct {
   PrepareFunction func()
   RunFunction func() bool
+  SetupFunction func()
   FinalizeFunction func()
 }
 
 type ConsoleMainloop struct {
   *Mainloop
   *bufio.ReadWriter
+  prompt string
 }
 
-func NewConsoleMainloop () ConsoleMainloop {
+func NewConsoleMainloop (prompt string) ConsoleMainloop {
 
   indevice := bufio.NewReader(os.Stdin)
   outdevice := bufio.NewWriter(os.Stdin)
@@ -36,11 +40,12 @@ func NewConsoleMainloop () ConsoleMainloop {
   ml := Mainloop{
     func () {},
     func () bool { return false },
+    func () { inout.WriteString(prompt)},
     func () {},
   }
 
 
-  cm := ConsoleMainloop{&ml, inout}
+  cm := ConsoleMainloop{&ml, inout, prompt}
 
   return cm
 }
@@ -56,4 +61,9 @@ func (cm *Mainloop) Run () bool {
 func (cm *Mainloop) Finalize () {
 
 }
+
+func (ml *Mainloop) Setup () {
+  ml.SetupFunction()
+}
+
 
